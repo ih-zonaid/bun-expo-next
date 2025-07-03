@@ -1,3 +1,7 @@
+export { auth } from "./src/auth";
+
+export { db } from "./src/db";
+
 export { createCaller } from "./src/api/root";
 
 export { createTRPCContext } from "./src/api/trpc";

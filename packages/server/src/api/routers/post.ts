@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { createTRPCRouter, publicProcedure } from "../trpc";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { posts } from "../../db/schema";
 
 export const postRouter = createTRPCRouter({
@@ -26,5 +26,11 @@ export const postRouter = createTRPCRouter({
     });
 
     return post ?? null;
+  }),
+
+  protectedProcedure: protectedProcedure.query(async ({ ctx }) => {
+    const user = ctx.session.user;
+
+    return user;
   }),
 });
