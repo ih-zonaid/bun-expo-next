@@ -1,0 +1,19 @@
+{
+  "name": "ih-starter",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "expo": "cd apps/expo && expo start",
+    "dev": "cd packages/api && bun dev"
+  },
+  "devDependencies": {},
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+  }
+}

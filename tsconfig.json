@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "strictNullChecks": true,
+    "noUncheckedIndexedAccess": true,
+    "paths": {
+      "@ih/api/*": ["./packages/api/*"],
+      "@ih/ui/*": ["./packages/ui/*"]
+    }
+  },
+  "extends": "expo/tsconfig.base"
+}
