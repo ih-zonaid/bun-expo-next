@@ -1,8 +1,9 @@
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
-import { type NextRequest, NextResponse } from "next/server";
+import { type NextRequest } from "next/server";
 
 import { env } from "~/env";
 import { appRouter, createTRPCContext } from "@packages/server";
+import { corsHeaders, handleCorsOptions } from "~/lib/cors";
 
 /**
  * This wraps the `createTRPCContext` helper and provides the required context for the tRPC API when
@@ -30,27 +31,12 @@ const handler = (req: NextRequest) =>
         : undefined,
     responseMeta() {
       return {
-        headers: {
-          "Access-Control-Allow-Origin": "http://localhost:8081",
-          "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-          "Access-Control-Allow-Headers": "Content-Type, Authorization",
-          "Access-Control-Allow-Credentials": "true",
-        },
+        headers: corsHeaders,
       };
     },
   });
 
 // Handle preflight requests
-export async function OPTIONS(req: NextRequest) {
-  return new NextResponse(null, {
-    status: 200,
-    headers: {
-      "Access-Control-Allow-Origin": "http://localhost:8081",
-      "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type, Authorization",
-      "Access-Control-Allow-Credentials": "true",
-    },
-  });
-}
+export const OPTIONS = handleCorsOptions;
 
 export { handler as GET, handler as POST };
