@@ -1,5 +1,5 @@
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
-import { type NextRequest } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 
 import { env } from "~/env";
 import { appRouter, createTRPCContext } from "@packages/server";
@@ -28,6 +28,29 @@ const handler = (req: NextRequest) =>
             );
           }
         : undefined,
+    responseMeta() {
+      return {
+        headers: {
+          "Access-Control-Allow-Origin": "http://localhost:8081",
+          "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type, Authorization",
+          "Access-Control-Allow-Credentials": "true",
+        },
+      };
+    },
   });
+
+// Handle preflight requests
+export async function OPTIONS(req: NextRequest) {
+  return new NextResponse(null, {
+    status: 200,
+    headers: {
+      "Access-Control-Allow-Origin": "http://localhost:8081",
+      "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      "Access-Control-Allow-Credentials": "true",
+    },
+  });
+}
 
 export { handler as GET, handler as POST };
