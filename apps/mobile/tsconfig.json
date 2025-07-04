@@ -1,0 +1,21 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+   "allowImportingTsExtensions": true,
+     "moduleResolution": "bundler",
+
+    "paths": {
+      "@/*": [
+        "./*"
+      ],
+      "@web/*": ["../web/src/server/*"]
+    }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts"
+  ]
+}

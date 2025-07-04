@@ -6,6 +6,8 @@ const allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:19006", // Expo dev server
   "https://starter-mobile.expo.app",
+  "http://192.168.0.234:8081",
+  "http://192.168.0.234:8081",
   // Add more URLs here
 ];
 
@@ -58,6 +60,7 @@ export function withCors<T extends any[]>(
 ) {
   return async (req: NextRequest, ...args: T): Promise<Response> => {
     const origin = req.headers.get("origin");
+    console.log("CORS origin:", origin);
     const response = await handler(req, ...args);
     return addCorsHeaders(response, origin);
   };
