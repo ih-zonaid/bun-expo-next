@@ -3,7 +3,7 @@ import { type NextRequest } from "next/server";
 
 import { env } from "~/env";
 import { appRouter, createTRPCContext } from "@packages/server";
-import { corsHeaders, handleCorsOptions } from "~/lib/cors";
+import { handleCorsOptions, withCors } from "~/lib/cors";
 
 /**
  * This wraps the `createTRPCContext` helper and provides the required context for the tRPC API when
@@ -29,14 +29,11 @@ const handler = (req: NextRequest) =>
             );
           }
         : undefined,
-    responseMeta() {
-      return {
-        headers: corsHeaders,
-      };
-    },
   });
 
 // Handle preflight requests
 export const OPTIONS = handleCorsOptions;
 
-export { handler as GET, handler as POST };
+// Wrap handlers with CORS
+export const GET = withCors(handler);
+export const POST = withCors(handler);

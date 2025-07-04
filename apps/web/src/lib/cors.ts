@@ -18,10 +18,12 @@ export const corsHeaders = {
 
 // Get CORS headers with dynamic origin
 export function getCorsHeaders(origin?: string | null): Record<string, string> {
+  // If origin is provided and it's in our allowed list, use it
+  // Otherwise, fall back to the first allowed origin or localhost:3000
   const allowedOrigin =
     origin && allowedOrigins.includes(origin)
       ? origin
-      : allowedOrigins[0] || "http://localhost:3000";
+      : "http://localhost:3000";
 
   return {
     ...corsHeaders,
