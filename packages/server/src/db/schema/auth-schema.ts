@@ -1,4 +1,4 @@
-import { index, sqliteTableCreator } from "drizzle-orm/sqlite-core";
+import { index } from "drizzle-orm/sqlite-core";
 import { createTable } from "./posts-schema";
 
 // Use the same table creator as in index.ts
