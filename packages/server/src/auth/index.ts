@@ -15,4 +15,13 @@ export const auth = betterAuth({
     },
   },
   trustedOrigins: ["myapp://", "http://localhost:8081"],
+  advanced: {
+    defaultCookieAttributes: {
+      sameSite: "None", // Use "None" for cross-origin
+      secure: true,
+      // httpOnly: true,
+      // path: "/",
+      // partitioned: true, // New browser standards will mandate this for foreign cookies
+    },
+  },
 });

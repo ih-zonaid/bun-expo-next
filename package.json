@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "expo": "cd apps/expo && expo start",
-    "dev": "cd packages/api && bun dev"
+    "dev": "cd packages/nextjs && bun dev"
   },
   "devDependencies": {},
   "workspaces": [
