@@ -5,7 +5,7 @@ export const transformer = superjson;
 
 export function getApiBaseUrl() {
   if (process.env.NODE_ENV === "production") {
-    return "https://bun-expo-next-web.vercel.app";
+    return process.env.EXPO_PUBLIC_SERVER_URL;
   }
 
   // Check if running on web or native

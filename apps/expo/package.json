@@ -9,7 +9,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "lint": "expo lint",
-    "web:build": "expo export --platform web --clear",
+    "web:build": "sed -i '' 's/# NODE_ENV/NODE_ENV/' .env && expo export --platform web --clear && sed -i '' 's/NODE_ENV/# NODE_ENV/' .env",
     "web:deploy": "eas deploy --prod"
   },
   "dependencies": {
