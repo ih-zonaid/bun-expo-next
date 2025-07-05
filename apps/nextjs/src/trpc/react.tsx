@@ -9,7 +9,6 @@ import SuperJSON from "superjson";
 
 import { type AppRouter } from "@packages/server";
 import { createQueryClient } from "./query-client";
-import { authClient } from "~/lib/auth-client";
 
 let clientQueryClientSingleton: QueryClient | undefined = undefined;
 const getQueryClient = () => {
