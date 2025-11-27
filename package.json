@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "expo": "cd apps/expo && expo start",
-    "dev": "cd packages/nextjs && bun dev"
+    "dev": "cd apps/nextjs && bun dev",
+    "db:push": "export $(grep -v '^#' apps/nextjs/.env | grep -v '^$' | sed 's/#.*//' | xargs) && cd packages/server && bun run db:push"
   },
   "devDependencies": {},
   "workspaces": [
@@ -14,6 +15,5 @@
   "peerDependencies": {
     "typescript": "^5"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }

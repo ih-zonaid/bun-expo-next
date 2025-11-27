@@ -3,21 +3,28 @@ import superjson from "superjson";
 
 export const transformer = superjson;
 
-export function getApiBaseUrl() {
+export function getApiBaseUrl(): string {
+  // Set default base URL
+  let baseUrl = "http://localhost:3000";
+
+  // Use production server URL if in production
   if (process.env.NODE_ENV === "production") {
-    return process.env.EXPO_PUBLIC_SERVER_URL;
+    const serverUrl = process.env.EXPO_PUBLIC_SERVER_URL;
+    if (!serverUrl) {
+      throw new Error("EXPO_PUBLIC_SERVER_URL is not defined in production");
+    }
+    baseUrl = serverUrl;
   }
 
-  // Check if running on web or native
-  if (Platform.OS === "web") {
-    // Web environment
-    return "http://localhost:3000";
-  } else {
-    // Native environment - use your machine's IP
-    return "http://192.168.0.234:3000"; // Replace with your actual IP
+  // Adjust for platform specifics
+  if (Platform.OS === "android") {
+    baseUrl = "http://10.0.2.2:3000";
   }
+
+  return baseUrl;
 }
 
 export function getTrpcUrl() {
-  return getApiBaseUrl() + "/api/trpc";
+  const baseUrl = getApiBaseUrl();
+  return `${baseUrl}/api/trpc`;
 }

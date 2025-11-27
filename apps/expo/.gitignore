@@ -38,3 +38,7 @@ yarn-error.*
 
 app-example
 .vercel
+
+android
+ios
+.expo
